@@ -66,6 +66,7 @@
   margin-top: 5px;
   width: calc(100% - 20px);
   background-color: #eee;
+  color: #888;
 }
 
 .pageWrap .sidebar .button {
@@ -208,6 +209,7 @@
   font-size: 30px;
   border-radius: 15px;
   overflow: hidden;
+  color: #888;
 }
 .pageWrap .img-unit img{
   width: 100%;
