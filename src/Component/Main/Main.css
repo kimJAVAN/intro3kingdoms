@@ -1,3 +1,14 @@
+/* @font-face {
+  font-family: 'KopubDotum';
+  src: url('./fonts/KopubDotum.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'KopubBatang';
+  src: url('./fonts/KopubBatang.ttf') format('truetype');
+} */
+
+@import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
+
 #root{
   /* margin: 0; */
   display: flex;
@@ -198,3 +209,11 @@
   margin: 5px 0px;
   font-size: 14px;
 }
+
+.kopubdotum {
+  font-family: 'KoPub Dotum', sans-serif;
+}
+.kopubbatang {
+  font-family: 'KoPub Batang', serif;
+}
+

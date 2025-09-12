@@ -18,25 +18,24 @@ export default function Main() {
   const [tweetEtc, setTweetEtc] = useState('');
   const [majorEtc, setMajorEtc] = useState('');
   const [allEtc, setAllEtc] = useState('');
-  const [fubFree, setFubFree] = useState(null);
   const [relation, setRelation] = useState({ 블언블: false, 언팔: false, 블락: false, 뮤트: false });
   const [relationEtc, setRelationEtc] = useState('');
   const [profileImg, setProfileImg] = useState(null);
-  const [highlight, setHighlight] = useState({
-    nickname: true, age: true, majors: true, fub: true, relation: true
-  });
+
+  // 글꼴 (한자용)
+  const [fontFamily, setFontFamily] = useState('kopubdotum'); 
 
   // --- 덕질 성향 ---
-  const [favChars, setFavChars] = useState('');          // 최애/차애
-  const [cpReverseOk, setCpReverseOk] = useState(null);  // CP OX
-  const [cpEtc, setCpEtc] = useState('');                // CP 비고
-  const [triggers, setTriggers] = useState('');          // 지뢰
-  const [triggerAction, setTriggerAction] = useState(''); // 지뢰 대처
+  const [favChars, setFavChars] = useState('');
+  const [cpReverseOk, setCpReverseOk] = useState(null);
+  const [cpEtc, setCpEtc] = useState('');
+  const [triggers, setTriggers] = useState('');
+  const [triggerAction, setTriggerAction] = useState('');
 
-  // --- 삼국지 관련 추가 상태 ---
-  const [selectedFactions, setSelectedFactions] = useState([]); // 선호 진영
-  const [favList, setFavList] = useState([{ img: null, name: '' }]); // 최애 삼국지
-  const [oneWord, setOneWord] = useState(''); // 한마디
+  // --- 삼국지 관련 ---
+  const [selectedFactions, setSelectedFactions] = useState([]);
+  const [favList, setFavList] = useState([{ img: null, name: '' }]);
+  const [oneWord, setOneWord] = useState('');
 
   const canvasRef = useRef(null);
 
@@ -56,9 +55,9 @@ export default function Main() {
   const toggleRelation = (key) =>
     setRelation(prev => ({ ...prev, [key]: !prev[key] }));
 
-  const toggleFaction = (side) => {
+  const toggleFaction = (faction) => {
     setSelectedFactions(prev =>
-      prev.includes(side) ? prev.filter(s => s !== side) : [...prev, side]
+      prev.includes(faction) ? prev.filter(f => f !== faction) : [...prev, faction]
     );
   };
 
@@ -102,9 +101,25 @@ export default function Main() {
     link.click();
   };
 
+  const factionColors = {
+    '魏': '#2b3fb3ff',
+    '蜀': '#1a8a1aff',
+    '吳': '#b3220eff',
+    '他': '#59585aff'
+  };
+  const lightColor = '#ddd';
+
+  // --- 한자만 폰트 적용 ---
+  const hanjaRegex = /[\u4E00-\u9FFF]/;
+  const renderHanjaText = (text) => {
+    if (!text) return null;
+    return text.split('').map((char, idx) =>
+      hanjaRegex.test(char) ? <span key={idx} className={fontFamily}>{char}</span> : char
+    );
+  };
+
   return (
     <div className="pageWrap">
-      {/* ---------------- Sidebar ---------------- */}
       <div className="sidebar">
         <h2>설정</h2>
         <div className="section">
@@ -161,61 +176,46 @@ export default function Main() {
           <input value={allEtc} onChange={e => setAllEtc(e.target.value)} placeholder="기타" />
         </div>
 
-        {/* -------- 덕질 성향 입력 -------- */}
+        {/* 덕질 성향 */}
         <div className="section">
           <label>최애/차애</label>
-          <input
-            value={favChars}
-            onChange={e => setFavChars(e.target.value)}
-            placeholder="최애/차애 입력"
-          />
+          <input value={favChars} onChange={e => setFavChars(e.target.value)} placeholder="최애/차애 입력" />
         </div>
 
         <div className="section">
           <label>CP / 리버스 ok</label>
-          <input
-            value={cpEtc}
-            onChange={e => setCpEtc(e.target.value)}
-            placeholder="CP 관련 비고 입력"
-          />
+          <input value={cpEtc} onChange={e => setCpEtc(e.target.value)} placeholder="CP 관련 비고 입력" />
           <div className="chipsRow">
             {['O', 'X'].map(opt => (
-              <button
-                key={opt}
-                className={cpReverseOk === opt ? 'chip active' : 'chip'}
-                onClick={() => setCpReverseOk(opt)}
-              >
-                {opt}
-              </button>
+              <button key={opt} className={cpReverseOk === opt ? 'chip active' : 'chip'} onClick={() => setCpReverseOk(opt)}>{opt}</button>
             ))}
           </div>
         </div>
 
         <div className="section">
           <label>지뢰 / 지뢰 대처</label>
-          <input
-            value={triggers}
-            onChange={e => setTriggers(e.target.value)}
-            placeholder="지뢰 키워드"
-          />
+          <input value={triggers} onChange={e => setTriggers(e.target.value)} placeholder="지뢰 키워드" />
           <div className="chipsRow">
             {['블락', '뮤트', '알아서 거름', '멘션 아니면 OK'].map(opt => (
-              <button
-                key={opt}
-                className={triggerAction === opt ? 'chip active' : 'chip'}
-                onClick={() => setTriggerAction(opt)}
-              >
-                {opt}
-              </button>
+              <button key={opt} className={triggerAction === opt ? 'chip active' : 'chip'} onClick={() => setTriggerAction(opt)}>{opt}</button>
             ))}
           </div>
         </div>
 
-        {/* -------- 삼국지 관련 입력 -------- */}
+        {/* 글꼴 선택 */}
+        <div className="section">
+          <label>글꼴</label>
+          <div className="chipsRow">
+            <button className={fontFamily === 'kopubdotum' ? 'chip active' : 'chip'} onClick={() => setFontFamily('kopubdotum')}>고딕</button>
+            <button className={fontFamily === 'kopubbatang' ? 'chip active' : 'chip'} onClick={() => setFontFamily('kopubbatang')}>세리프</button>
+          </div>
+        </div>
+
+        {/* 삼국지 */}
         <div className="section">
           <label>선호 진영</label>
           <div className="chipsRow">
-            {['위', '촉', '오', '타'].map(side => (
+            {['魏','蜀','吳','他'].map(side => (
               <button
                 key={side}
                 className={selectedFactions.includes(side) ? 'chip active' : 'chip'}
@@ -231,20 +231,9 @@ export default function Main() {
           <label>최애 삼국지</label>
           {favList.map((item, idx) => (
             <div key={idx} style={{ marginBottom: '8px' }}>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={e => handleFavImg(idx, e.target.files?.[0])}
-              />
-              <input
-                type="text"
-                value={item.name}
-                onChange={e => handleFavName(idx, e.target.value)}
-                placeholder="작품 이름"
-              />
-              {favList.length > 1 && (
-                <button onClick={() => removeFav(idx)}>-</button>
-              )}
+              <input type="file" accept="image/*" onChange={e => handleFavImg(idx, e.target.files?.[0])} />
+              <input type="text" value={item.name} onChange={e => handleFavName(idx, e.target.value)} placeholder="작품 이름" />
+              {favList.length > 1 && <button onClick={() => removeFav(idx)}>-</button>}
             </div>
           ))}
           {favList.length < 3 && <button onClick={addFav}>+ 추가</button>}
@@ -252,26 +241,19 @@ export default function Main() {
 
         <div className="section">
           <label>한마디</label>
-          <input
-            value={oneWord}
-            onChange={e => setOneWord(e.target.value)}
-            placeholder="하고 싶은 말"
-          />
+          <input value={oneWord} onChange={e => setOneWord(e.target.value)} placeholder="하고 싶은 말" />
         </div>
       </div>
 
-      {/* ---------------- Canvas ---------------- */}
+      {/* Canvas */}
       <div className="canvasWrap">
         <button className="button" onClick={exportPNG}>PNG 내보내기 (1000×600)</button>
         <div className="canvas" ref={canvasRef}>
           <div className='text-area'>
             <div className="row">
               <div className="profileBox">
-                {profileImg ? (
-                  <img src={profileImg} alt='profile' className='profileImg' />
-                ) : (
-                  <div className='profilePlaceholder'>프로필 이미지</div>
-                )}
+                {profileImg ? <img src={profileImg} alt='profile' className='profileImg' /> :
+                <div className='profilePlaceholder'>프로필 이미지</div>}
               </div>
               <div className='profileInfo'>
                 <div className='textBlock'>{nickname || '닉네임'}</div>
@@ -279,70 +261,37 @@ export default function Main() {
               </div>
             </div>
 
-            <div>
-              <p className='large-text'>트윗성향</p>
-            </div>
-
+            <p className='large-text'>트윗성향</p>
             <div className='textBlock'>
-              전공/활동 | {
-                [
-                  ...Object.entries(majors).filter(([k, v]) => v).map(([k]) => k),
-                  ...(majorEtc ? [majorEtc] : [])
-                ].join(', ')
-              }
+              전공/활동 | {renderHanjaText([...Object.entries(majors).filter(([k,v])=>v).map(([k])=>k), ...(majorEtc?[majorEtc]:[])].join(', '))}
             </div>
-
             <div className='textBlock'>
-              트윗 성향 | {
-                [
-                  ...Object.entries(tweet).filter(([k, v]) => v).map(([k]) => k),
-                  ...(tweetEtc ? [tweetEtc] : [])
-                ].join(', ')
-              }
+              트윗 성향 | {renderHanjaText([...Object.entries(tweet).filter(([k,v])=>v).map(([k])=>k), ...(tweetEtc?[tweetEtc]:[])].join(', '))}
             </div>
-
             <div className='textBlock'>
-              이별 | {
-                [
-                  ...Object.entries(relation).filter(([k, v]) => v).map(([k]) => k),
-                  ...(relationEtc ? [relationEtc] : [])
-                ].join(', ')
-              }
+              이별 | {renderHanjaText([...Object.entries(relation).filter(([k,v])=>v).map(([k])=>k), ...(relationEtc?[relationEtc]:[])].join(', '))}
             </div>
+            {allEtc && <div className='textBlock'>그 외 주의사항 | {allEtc}</div>}
 
-            {allEtc &&
-              <div className='textBlock'>
-                그 외 주의사항 | {allEtc}
-              </div>
-            }
-
-            <div>
-              <p className='large-text'>덕질성향</p>
-            </div>
-
-            <div className='textBlock'>
-              최애/차애 | {favChars || ''}
-            </div>
-
-            <div className='textBlock'>
-              CP / 리버스 ok | {cpEtc || ''} {cpReverseOk ? `| ${cpReverseOk}` : ''}
-            </div>
-
-            <div className='textBlock'>
-              지뢰 / 지뢰대처 | {triggers || ''}
-              {triggerAction && ` | ${triggerAction}`}
-            </div>
+            <p className='large-text'>덕질성향</p>
+            <div className='textBlock'>최애/차애 | {favChars || ''}</div>
+            <div className='textBlock'>CP / 리버스 ok | {cpEtc || ''} {cpReverseOk ? `| ${cpReverseOk}` : ''}</div>
+            <div className='textBlock'>지뢰 / 지뢰대처 | {triggers || ''}{triggerAction && ` | ${triggerAction}`}</div>
           </div>
 
           <div className='img-area'>
             <p className='large-text'>선호 진영</p>
             <div className='choose-area'>
-              {['위', '촉', '오'].map(side => (
-                <div
-                  key={side}
-                  className={`faction-logo ${selectedFactions.includes(side) ? 'active' : ''}`}
-                >
-                  {side}
+              {['魏','蜀','吳','他'].map(side => (
+                <div key={side} style={{
+                  display:'inline-block',
+                  padding:'4px 8px',
+                  margin:'4px',
+                  borderRadius:'4px',
+                  backgroundColor: selectedFactions.includes(side) ? factionColors[side] : lightColor,
+                  color: selectedFactions.includes(side) ? '#fff' : '#555'
+                }}>
+                  {renderHanjaText(side)}
                 </div>
               ))}
             </div>
@@ -352,11 +301,7 @@ export default function Main() {
               {favList.map((item, idx) => (
                 <div className='img-unit' key={idx}>
                   <div className='img-overflow'>
-                    {item.img ? (
-                      <img src={item.img} alt={`fav-${idx}`} />
-                    ) : (
-                      <div className='img-placeholder'>+</div>
-                    )}
+                    {item.img ? <img src={item.img} alt={`fav-${idx}`} /> : <div className='img-placeholder'>+</div>}
                   </div>
                   {item.name && <p className='sul-name'>{item.name}</p>}
                 </div>
