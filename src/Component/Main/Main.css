@@ -35,6 +35,9 @@
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
 }
+.pageWrap .section:nth-last-of-type(1){
+  border-bottom: none;
+}
 
 .pageWrap .sidebar label {
   display: flex;
@@ -87,7 +90,8 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  flex-direction: column;
 }
 
 .pageWrap .canvas {
@@ -107,6 +111,7 @@
   display: flex;
   gap: 16px;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .pageWrap .profileBox {
@@ -151,8 +156,11 @@
 }
 
 .pageWrap .large-text{
-  font-size: 24px;
+  font-size: 20px;
   margin:0;
   margin-bottom: 10px;
   margin-top: 20px;
+}
+.pageWrap .chipsRow{
+  margin-top:10px;
 }
