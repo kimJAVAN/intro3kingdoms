@@ -103,8 +103,11 @@
   padding: 20px;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
+}
+.pageWrap .canvas>div{
+  width: 50%;
 }
 
 .pageWrap .row {
@@ -163,4 +166,35 @@
 }
 .pageWrap .chipsRow{
   margin-top:10px;
+}
+.pageWrap .img-wrapper{
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.pageWrap .img-unit{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+}
+.pageWrap .img-overflow{
+  width: 130px;
+  height: 160px;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #888;
+  font-size: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.pageWrap .img-unit img{
+  width: 100%;
+}
+.pageWrap .sul-name{
+  color: #888;
+  margin: 5px 0px;
+  font-size: 14px;
 }

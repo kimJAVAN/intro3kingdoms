@@ -33,6 +33,11 @@ export default function Main() {
   const [triggers, setTriggers] = useState('');          // 지뢰
   const [triggerAction, setTriggerAction] = useState(''); // 지뢰 대처
 
+  // --- 삼국지 관련 추가 상태 ---
+  const [selectedFactions, setSelectedFactions] = useState([]); // 선호 진영
+  const [favList, setFavList] = useState([{ img: null, name: '' }]); // 최애 삼국지
+  const [oneWord, setOneWord] = useState(''); // 한마디
+
   const canvasRef = useRef(null);
 
   const onUploadImage = (e) => {
@@ -50,6 +55,40 @@ export default function Main() {
 
   const toggleRelation = (key) =>
     setRelation(prev => ({ ...prev, [key]: !prev[key] }));
+
+  const toggleFaction = (side) => {
+    setSelectedFactions(prev =>
+      prev.includes(side) ? prev.filter(s => s !== side) : [...prev, side]
+    );
+  };
+
+  const handleFavImg = (idx, file) => {
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    setFavList(prev => {
+      const updated = [...prev];
+      updated[idx].img = url;
+      return updated;
+    });
+  };
+
+  const handleFavName = (idx, value) => {
+    setFavList(prev => {
+      const updated = [...prev];
+      updated[idx].name = value;
+      return updated;
+    });
+  };
+
+  const addFav = () => {
+    if (favList.length < 3) setFavList([...favList, { img: null, name: '' }]);
+  };
+
+  const removeFav = (idx) => {
+    if (favList.length > 1) {
+      setFavList(prev => prev.filter((_, i) => i !== idx));
+    }
+  };
 
   const exportPNG = async () => {
     const node = canvasRef.current;
@@ -150,7 +189,6 @@ export default function Main() {
               </button>
             ))}
           </div>
-          
         </div>
 
         <div className="section">
@@ -172,13 +210,61 @@ export default function Main() {
             ))}
           </div>
         </div>
+
+        {/* -------- 삼국지 관련 입력 -------- */}
+        <div className="section">
+          <label>선호 진영</label>
+          <div className="chipsRow">
+            {['위', '촉', '오', '타'].map(side => (
+              <button
+                key={side}
+                className={selectedFactions.includes(side) ? 'chip active' : 'chip'}
+                onClick={() => toggleFaction(side)}
+              >
+                {side}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="section">
+          <label>최애 삼국지</label>
+          {favList.map((item, idx) => (
+            <div key={idx} style={{ marginBottom: '8px' }}>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={e => handleFavImg(idx, e.target.files?.[0])}
+              />
+              <input
+                type="text"
+                value={item.name}
+                onChange={e => handleFavName(idx, e.target.value)}
+                placeholder="작품 이름"
+              />
+              {favList.length > 1 && (
+                <button onClick={() => removeFav(idx)}>-</button>
+              )}
+            </div>
+          ))}
+          {favList.length < 3 && <button onClick={addFav}>+ 추가</button>}
+        </div>
+
+        <div className="section">
+          <label>한마디</label>
+          <input
+            value={oneWord}
+            onChange={e => setOneWord(e.target.value)}
+            placeholder="하고 싶은 말"
+          />
+        </div>
       </div>
 
       {/* ---------------- Canvas ---------------- */}
       <div className="canvasWrap">
         <button className="button" onClick={exportPNG}>PNG 내보내기 (1000×600)</button>
         <div className="canvas" ref={canvasRef}>
-          <div>
+          <div className='text-area'>
             <div className="row">
               <div className="profileBox">
                 {profileImg ? (
@@ -245,6 +331,41 @@ export default function Main() {
             <div className='textBlock'>
               지뢰 / 지뢰대처 | {triggers || ''}
               {triggerAction && ` | ${triggerAction}`}
+            </div>
+          </div>
+
+          <div className='img-area'>
+            <p className='large-text'>선호 진영</p>
+            <div className='choose-area'>
+              {['위', '촉', '오'].map(side => (
+                <div
+                  key={side}
+                  className={`faction-logo ${selectedFactions.includes(side) ? 'active' : ''}`}
+                >
+                  {side}
+                </div>
+              ))}
+            </div>
+
+            <p className='large-text'>최애 삼국지</p>
+            <div className='img-wrapper'>
+              {favList.map((item, idx) => (
+                <div className='img-unit' key={idx}>
+                  <div className='img-overflow'>
+                    {item.img ? (
+                      <img src={item.img} alt={`fav-${idx}`} />
+                    ) : (
+                      <div className='img-placeholder'>+</div>
+                    )}
+                  </div>
+                  {item.name && <p className='sul-name'>{item.name}</p>}
+                </div>
+              ))}
+            </div>
+
+            <p className='large-text'>한마디</p>
+            <div className='textBlock'>
+              <p>{oneWord}</p>
             </div>
           </div>
         </div>
