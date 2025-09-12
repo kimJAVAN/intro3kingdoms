@@ -188,7 +188,7 @@ export default function Main() {
 
         {/* 덕질 성향 */}
         <div className="section">
-          <label>최애/차애</label>
+          <label>최애 / 차애</label>
           <input value={favChars} onChange={e => setFavChars(e.target.value)} placeholder="최애/차애" />
         </div>
 
@@ -282,7 +282,7 @@ export default function Main() {
 
             <p className='large-text'>트윗성향</p>
             <div className='textBlock'>
-              전공/활동 | {renderHanjaText([...Object.entries(majors).filter(([k,v])=>v).map(([k])=>k), ...(majorEtc?[majorEtc]:[])].join(', '))}
+              전공 / 활동 | {renderHanjaText([...Object.entries(majors).filter(([k,v])=>v).map(([k])=>k), ...(majorEtc?[majorEtc]:[])].join(', '))}
             </div>
             <div className='textBlock'>
               트윗 성향 | {renderHanjaText([...Object.entries(tweet).filter(([k,v])=>v).map(([k])=>k), ...(tweetEtc?[tweetEtc]:[])].join(', '))}
@@ -293,7 +293,7 @@ export default function Main() {
             {allEtc && <div className='textBlock'>그 외 주의사항 | {allEtc}</div>}
 
             <p className='large-text'>덕질성향</p>
-            <div className='textBlock'>최애/차애 | {favChars || ''}</div>
+            <div className='textBlock'>최애 / 차애 | {favChars || ''}</div>
             <div className='textBlock'>CP / 리버스 ok | {cpEtc || ''} {cpReverseOk ? `| ${cpReverseOk}` : ''}</div>
             <div className='textBlock'>지뢰 / 지뢰대처 | {triggers || ''}{triggerAction && ` | ${triggerAction}`}</div>
           </div>
