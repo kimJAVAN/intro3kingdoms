@@ -64,6 +64,8 @@
   border-radius: 8px;
   border: 1px solid #ddd;
   margin-top: 5px;
+  width: calc(100% - 20px);
+  background-color: #eee;
 }
 
 .pageWrap .sidebar .button {
@@ -218,14 +220,22 @@
   white-space: normal;   
 }
 
-.kopubdotum {
+.pageWrap .kopubdotum {
   font-family: 'KoPub Dotum', sans-serif;
 }
-.kopubbatang {
+.pageWrap .kopubbatang {
   font-family: 'KoPub Batang', serif;
 }
 
-.img-make-button{
-  background-color: #2d58e6;
+.pageWrap .img-make-button{
+  background-color: #597be9;
   margin-bottom: 10px;
+}
+.pageWrap h2{
+  text-align: center;
+}
+.pageWrap h3{
+  background-color: #c7e0ee;
+  text-align: center;
+  margin: 0px;
 }

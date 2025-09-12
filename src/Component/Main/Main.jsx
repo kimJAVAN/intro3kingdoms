@@ -121,7 +121,11 @@ export default function Main() {
   return (
     <div className="pageWrap">
       <div className="sidebar">
+ 
         <h2>설정</h2>
+
+        <h3>프로필</h3>
+
         <div className="section">
           <label>프로필 이미지</label>
           <input type="file" accept="image/*" onChange={onUploadImage} />
@@ -140,6 +144,8 @@ export default function Main() {
             ))}
           </div>
         </div>
+
+        <h3>트윗성향</h3>
 
         <div className="section">
           <label>전공/활동</label>
@@ -171,20 +177,24 @@ export default function Main() {
           <input value={relationEtc} onChange={e => setRelationEtc(e.target.value)} placeholder="기타" />
         </div>
 
+ 
+
         <div className="section">
           <label>그 외 주의사항</label>
           <input value={allEtc} onChange={e => setAllEtc(e.target.value)} placeholder="기타" />
         </div>
 
+        <h3>덕질 성향</h3>
+
         {/* 덕질 성향 */}
         <div className="section">
           <label>최애/차애</label>
-          <input value={favChars} onChange={e => setFavChars(e.target.value)} placeholder="최애/차애 입력" />
+          <input value={favChars} onChange={e => setFavChars(e.target.value)} placeholder="최애/차애" />
         </div>
 
         <div className="section">
           <label>CP / 리버스 ok</label>
-          <input value={cpEtc} onChange={e => setCpEtc(e.target.value)} placeholder="CP 관련 비고 입력" />
+          <input value={cpEtc} onChange={e => setCpEtc(e.target.value)} placeholder="CP" />
           <div className="chipsRow">
             {['O', 'X'].map(opt => (
               <button key={opt} className={cpReverseOk === opt ? 'chip active' : 'chip'} onClick={() => setCpReverseOk(opt)}>{opt}</button>
@@ -202,6 +212,9 @@ export default function Main() {
           </div>
         </div>
 
+
+        <h3>선호 진영</h3>
+
         {/* 글꼴 선택 */}
         <div className="section">
           <label>글꼴</label>
@@ -210,6 +223,8 @@ export default function Main() {
             <button className={fontFamily === 'kopubbatang' ? 'chip active' : 'chip'} onClick={() => setFontFamily('kopubbatang')}>세리프</button>
           </div>
         </div>
+
+
 
         {/* 삼국지 */}
         <div className="section">
@@ -227,6 +242,8 @@ export default function Main() {
           </div>
         </div>
 
+        <h3>최애 삼국지</h3>
+
         <div className="section">
           <label>최애 삼국지</label>
           {favList.map((item, idx) => (
@@ -239,9 +256,11 @@ export default function Main() {
           {favList.length < 3 && <button onClick={addFav}>+ 추가</button>}
         </div>
 
+        <h3>한마디</h3>
+
         <div className="section">
           <label>한마디</label>
-          <input value={oneWord} onChange={e => setOneWord(e.target.value)} placeholder="하고 싶은 말" />
+          <input value={oneWord} onChange={e => setOneWord(e.target.value)} placeholder="한마디" />
         </div>
       </div>
 
