@@ -247,7 +247,7 @@ export default function Main() {
 
       {/* Canvas */}
       <div className="canvasWrap">
-        <button className="button" onClick={exportPNG}>PNG 내보내기 (1000×600)</button>
+        <button className="button img-make-button" onClick={exportPNG}>이미지로 내보내기</button>
         <div className="canvas" ref={canvasRef}>
           <div className='text-area'>
             <div className="row">

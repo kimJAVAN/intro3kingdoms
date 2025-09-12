@@ -107,7 +107,7 @@
 
 .pageWrap .canvas {
   width: 1000px;
-  height: 600px;
+  height: auto;
   background: #fafafa;
   border-radius: 12px;
   border: 1px solid #eee;
@@ -116,9 +116,10 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
+  justify-content: space-between;
 }
 .pageWrap .canvas>div{
-  width: 50%;
+  width: 47%;
 }
 
 .pageWrap .row {
@@ -159,11 +160,15 @@
 
 .pageWrap .textBlock {
   padding: 6px 10px;
+  width: 100%;
+  /* overflow: hidden; */
   border-radius: 8px;
   background: #fff;
   border: 1px solid #eee;
   text-align: left;
   margin-bottom: 10px;
+  word-break: break-word;
+  white-space: normal;
 }
 .pageWrap .profileInfo .textBlock{
   margin: 0;
@@ -208,6 +213,9 @@
   color: #888;
   margin: 5px 0px;
   font-size: 14px;
+  width: 130px;
+  word-break: break-word;   
+  white-space: normal;   
 }
 
 .kopubdotum {
@@ -217,3 +225,7 @@
   font-family: 'KoPub Batang', serif;
 }
 
+.img-make-button{
+  background-color: #2d58e6;
+  margin-bottom: 10px;
+}
