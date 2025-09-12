@@ -330,7 +330,7 @@ export default function Main() {
             </div>
 
             <p className='large-text'>한마디</p>
-            <div className='textBlock'>
+            <div className='textBlock textBloct-two'>
               <p>{oneWord}</p>
             </div>
           </div>

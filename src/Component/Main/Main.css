@@ -258,3 +258,9 @@
   text-align: center;
   margin: 0px;
 }
+.pageWrap .textBloct-two{
+  width: 95%;
+}
+.pageWrap .textBloct-two p{
+  margin: 3px 0px;
+}
