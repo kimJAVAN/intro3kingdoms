@@ -299,10 +299,12 @@ export default function Main() {
           </div>
 
           <div className='img-area'>
-            <p className='large-text'>선호 진영</p>
+            <p className='large-text no-margin'>선호 진영</p>
             <div className='choose-area'>
               {['魏','蜀','吳','他'].map(side => (
-                <div key={side} style={{
+                <div key={side} 
+                  className='choose-jin-btn'
+                style={{
                   display:'inline-block',
                   padding:'4px 8px',
                   margin:'4px',

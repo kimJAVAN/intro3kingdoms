@@ -183,6 +183,9 @@
   margin-bottom: 10px;
   margin-top: 20px;
 }
+.pageWrap .large-text.no-margin{
+  margin-top: 0;
+}
 .pageWrap .chipsRow{
   margin-top:10px;
 }
@@ -221,6 +224,19 @@
   width: 130px;
   word-break: break-word;   
   white-space: normal;   
+  text-align: center;
+}
+.pageWrap .choose-jin-btn{
+  width: 38px;
+  text-align: center;
+  aspect-ratio: 1/1;
+  height: 40px;
+  line-height: 37px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  /* padding: 0; */
 }
 
 .pageWrap .kopubdotum {
