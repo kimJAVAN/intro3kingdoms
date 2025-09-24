@@ -282,20 +282,20 @@ export default function Main() {
 
             <p className='large-text'>트윗성향</p>
             <div className='textBlock'>
-              전공 / 활동 | {renderHanjaText([...Object.entries(majors).filter(([k,v])=>v).map(([k])=>k), ...(majorEtc?[majorEtc]:[])].join(', '))}
+              <span className='bold-text'>전공 / 활동 | </span>{renderHanjaText([...Object.entries(majors).filter(([k,v])=>v).map(([k])=>k), ...(majorEtc?[majorEtc]:[])].join(', '))}
             </div>
             <div className='textBlock'>
-              트윗 성향 | {renderHanjaText([...Object.entries(tweet).filter(([k,v])=>v).map(([k])=>k), ...(tweetEtc?[tweetEtc]:[])].join(', '))}
+              <span className='bold-text'>트윗 성향 | </span>{renderHanjaText([...Object.entries(tweet).filter(([k,v])=>v).map(([k])=>k), ...(tweetEtc?[tweetEtc]:[])].join(', '))}
             </div>
             <div className='textBlock'>
-              이별 | {renderHanjaText([...Object.entries(relation).filter(([k,v])=>v).map(([k])=>k), ...(relationEtc?[relationEtc]:[])].join(', '))}
+              <span className='bold-text'>이별 | </span>{renderHanjaText([...Object.entries(relation).filter(([k,v])=>v).map(([k])=>k), ...(relationEtc?[relationEtc]:[])].join(', '))}
             </div>
             {allEtc && <div className='textBlock'>그 외 주의사항 | {allEtc}</div>}
 
             <p className='large-text'>덕질성향</p>
-            <div className='textBlock'>최애 / 차애 | {favChars || ''}</div>
-            <div className='textBlock'>CP / 리버스 ok | {cpEtc || ''} {cpReverseOk ? `| ${cpReverseOk}` : ''}</div>
-            <div className='textBlock'>지뢰 / 지뢰대처 | {triggers || ''}{triggerAction && ` | ${triggerAction}`}</div>
+            <div className='textBlock'><span className='bold-text'> 최애 / 차애 | </span>{favChars || ''}</div>
+            <div className='textBlock'><span className='bold-text'> CP / 리버스 ok | </span>{cpEtc || ''} {cpReverseOk ? `| ${cpReverseOk}` : ''}</div>
+            <div className='textBlock'><span className='bold-text'> 지뢰 / 지뢰대처 | </span>{triggers || ''}{triggerAction && ` | ${triggerAction}`}</div>
           </div>
 
           <div className='img-area'>
@@ -312,7 +312,10 @@ export default function Main() {
                   backgroundColor: selectedFactions.includes(side) ? factionColors[side] : lightColor,
                   color: selectedFactions.includes(side) ? '#fff' : '#555'
                 }}>
-                  {renderHanjaText(side)}
+                  <p>
+        {renderHanjaText(side)}
+                  </p>
+          
                 </div>
               ))}
             </div>

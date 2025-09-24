@@ -226,19 +226,27 @@
   white-space: normal;   
   text-align: center;
 }
+.pageWrap .choose-area{
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
 .pageWrap .choose-jin-btn{
-  width: 38px;
+  /* width: 38px; */
   text-align: center;
   aspect-ratio: 1/1;
-  height: 40px;
-  line-height: 37px;
+  /* height: 40px; */
+  /* height: 40px; */
+  /* line-height: 37px; */
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 28px;
   /* padding: 0; */
 }
-
+.pageWrap .choose-jin-btn p {
+  margin: 0;
+}
 .pageWrap .kopubdotum {
   font-family: 'KoPub Dotum', sans-serif;
 }
@@ -263,4 +271,26 @@
 }
 .pageWrap .textBloct-two p{
   margin: 3px 0px;
+}
+
+.bold-text{
+  font-weight: bold;
+}
+
+@media screen and (max-width : 768px) {
+  #root{
+    padding : 20px
+  }
+  .pageWrap {
+    flex-direction: column-reverse;
+    /* flex-wrap: wrap-reverse; */
+    padding: 0;
+  }
+  .pageWrap .canvasWrap{
+    align-items: flex-start;
+  }
+  .pageWrap .canvas{
+    overflow-x: scroll;
+    /* width: 100px; */
+  }
 }
