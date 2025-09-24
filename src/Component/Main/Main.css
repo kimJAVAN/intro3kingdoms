@@ -293,4 +293,8 @@
     overflow-x: scroll;
     /* width: 100px; */
   }
+  .pageWrap .sidebar{
+    overflow-y: inherit;
+    height: auto;
+  }
 }
