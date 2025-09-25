@@ -299,7 +299,7 @@ export default function Main() {
           <div className='absol-div'>
             {colorImages[themeColor].map((imgSrc, idx) => (
               <div className='absol-img' key={idx}>
-                <img src={imgSrc} alt={`배경-${idx}`} />
+                <img className="absol-img-tag" src={imgSrc} alt={`배경-${idx}`} />
               </div>
             ))}
           </div>

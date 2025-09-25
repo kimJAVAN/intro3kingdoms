@@ -134,25 +134,32 @@
   width: 50px;
   height: 50px;
 }
+.pageWrap .absol-img-tag{
+  display: block; /* inline-block 대신 block */
+}
 .pageWrap .absol-img:nth-of-type(1){
   left: 18px;
-  top:18px ;
-  rotate: 270deg;
+  top:18px;
+  transform: rotate(270deg);
+  transform-origin: center center;
 }
 .pageWrap .absol-img:nth-of-type(2){
   right: 18px;
-  top: 18px ;
+  top: 18px;
 }
 .pageWrap .absol-img:nth-of-type(3){
   right: 18px;
-  bottom: 18px ;
-  rotate: 90deg;
+  bottom: 18px;
+  transform: rotate(90deg);
+  transform-origin: center center;
 }
 .pageWrap .absol-img:nth-of-type(4){
   left: 18px;
-  bottom: 18px ;
-  rotate : 180deg;
+  bottom: 18px;
+  transform: rotate(180deg);
+  transform-origin: center center;
 }
+
 .pageWrap .absol-img img{
   width: 100%;
 }
