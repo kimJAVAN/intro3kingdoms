@@ -109,6 +109,20 @@ export default function Main() {
   };
   const lightColor = '#ddd';
 
+  // Main.jsx (상단 state 추가)
+  const [themeColor, setThemeColor] = useState('초록'); // 기본값 초록
+
+  // 색상별 이미지 매핑
+  const colorImages = {
+    초록: ["1.png", "1.png", "1.png", "1.png"],
+    파랑: ["2.png", "2.png", "2.png", "2.png"],
+    빨강: ["3.png", "3.png", "3.png", "3.png"],
+    보라: ["5.png", "5.png", "5.png", "5.png"],
+    노랑: ["6.png", "6.png", "6.png", "6.png"],
+    검정: ["4.png", "4.png", "4.png", "4.png"],
+  };
+
+
   // --- 한자만 폰트 적용 ---
   const hanjaRegex = /[\u4E00-\u9FFF]/;
   const renderHanjaText = (text) => {
@@ -215,6 +229,21 @@ export default function Main() {
 
         <h3>선호 진영</h3>
 
+        <div className="section">
+          <label>색상 선택</label>
+          <div className="chipsRow">
+            {['초록','파랑','빨강','노랑','보라','검정'].map(c => (
+              <button 
+                key={c} 
+                className={themeColor === c ? 'chip active' : 'chip'} 
+                onClick={() => setThemeColor(c)}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* 글꼴 선택 */}
         <div className="section">
           <label>글꼴</label>
@@ -223,8 +252,6 @@ export default function Main() {
             <button className={fontFamily === 'kopubbatang' ? 'chip active' : 'chip'} onClick={() => setFontFamily('kopubbatang')}>세리프</button>
           </div>
         </div>
-
-
 
         {/* 삼국지 */}
         <div className="section">
@@ -268,6 +295,15 @@ export default function Main() {
       <div className="canvasWrap">
         <button className="button img-make-button" onClick={exportPNG}>이미지로 내보내기</button>
         <div className="canvas" ref={canvasRef}>
+
+          <div className='absol-div'>
+            {colorImages[themeColor].map((imgSrc, idx) => (
+              <div className='absol-img' key={idx}>
+                <img src={imgSrc} alt={`배경-${idx}`} />
+              </div>
+            ))}
+          </div>
+
           <div className='text-area'>
             <div className="row">
               <div className="profileBox">
@@ -275,29 +311,28 @@ export default function Main() {
                 <div className='profilePlaceholder'>프로필 이미지</div>}
               </div>
               <div className='profileInfo'>
-                <div className='textBlock'>{nickname || '닉네임'}</div>
-                <div className='textBlock'>연령대 | {ageType}</div>
+                <div className='textBlock textBlock2'>{nickname || '닉네임'}</div>
+                <div className='textBlock textBlock2'>연령대 | {ageType}</div>
               </div>
             </div>
 
             <p className='large-text'>트윗성향</p>
             <div className='textBlock'>
-              <span className='bold-text'>전공 / 활동 | </span>{renderHanjaText([...Object.entries(majors).filter(([k,v])=>v).map(([k])=>k), ...(majorEtc?[majorEtc]:[])].join(', '))}
+              <span className='bold-text'>전공 / 활동 </span><span>{renderHanjaText([...Object.entries(majors).filter(([k,v])=>v).map(([k])=>k), ...(majorEtc?[majorEtc]:[])].join(', '))}</span>
             </div>
             <div className='textBlock'>
-              <span className='bold-text'>트윗 성향 | </span>{renderHanjaText([...Object.entries(tweet).filter(([k,v])=>v).map(([k])=>k), ...(tweetEtc?[tweetEtc]:[])].join(', '))}
+              <span className='bold-text'>트윗 성향 </span><span>{renderHanjaText([...Object.entries(tweet).filter(([k,v])=>v).map(([k])=>k), ...(tweetEtc?[tweetEtc]:[])].join(', '))}</span>
             </div>
             <div className='textBlock'>
-              <span className='bold-text'>이별 | </span>{renderHanjaText([...Object.entries(relation).filter(([k,v])=>v).map(([k])=>k), ...(relationEtc?[relationEtc]:[])].join(', '))}
+              <span className='bold-text'>이별 </span><span>{renderHanjaText([...Object.entries(relation).filter(([k,v])=>v).map(([k])=>k), ...(relationEtc?[relationEtc]:[])].join(', '))}</span>
             </div>
             {allEtc && <div className='textBlock'>그 외 주의사항 | {allEtc}</div>}
 
             <p className='large-text'>덕질성향</p>
-            <div className='textBlock'><span className='bold-text'> 최애 / 차애 | </span>{favChars || ''}</div>
-            <div className='textBlock'><span className='bold-text'> CP / 리버스 ok | </span>{cpEtc || ''} {cpReverseOk ? `| ${cpReverseOk}` : ''}</div>
-            <div className='textBlock'><span className='bold-text'> 지뢰 / 지뢰대처 | </span>{triggers || ''}{triggerAction && ` | ${triggerAction}`}</div>
+            <div className='textBlock'><span className='bold-text'> 최애 / 차애  </span><span>{favChars || ''}</span></div>
+            <div className='textBlock'><span className='bold-text'> CP / 리버스 ok  </span><span>{cpEtc || ''} {cpReverseOk ? `| ${cpReverseOk}` : ''}</span></div>
+            <div className='textBlock'><span className='bold-text'> 지뢰 / 지뢰대처 </span><span>{triggers || ''}{triggerAction && ` | ${triggerAction}`}</span></div>
           </div>
-
           <div className='img-area'>
             <p className='large-text no-margin'>선호 진영</p>
             <div className='choose-area'>
@@ -315,7 +350,6 @@ export default function Main() {
                   <p>
         {renderHanjaText(side)}
                   </p>
-          
                 </div>
               ))}
             </div>
