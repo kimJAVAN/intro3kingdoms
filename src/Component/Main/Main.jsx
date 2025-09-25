@@ -326,7 +326,7 @@ export default function Main() {
             <div className='textBlock'>
               <span className='bold-text'>이별 </span><span>{renderHanjaText([...Object.entries(relation).filter(([k,v])=>v).map(([k])=>k), ...(relationEtc?[relationEtc]:[])].join(', '))}</span>
             </div>
-            {allEtc && <div className='textBlock'>그 외 주의사항 | {allEtc}</div>}
+            {allEtc && <div className='textBlock'><span className='bold-text'>그 외 주의사항 </span>{allEtc}</div>}
 
             <p className='large-text'>덕질성향</p>
             <div className='textBlock'><span className='bold-text'> 최애 / 차애  </span><span>{favChars || ''}</span></div>
