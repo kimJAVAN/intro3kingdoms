@@ -287,7 +287,14 @@ export default function Main() {
 
         <div className="section">
           <label>한마디</label>
-          <input value={oneWord} onChange={e => setOneWord(e.target.value)} placeholder="한마디" />
+          {/* <input value={oneWord} onChange={e => setOneWord(e.target.value)} placeholder="한마디" /> */}
+          <textarea 
+            value={oneWord} 
+            onChange={e => setOneWord(e.target.value)} 
+            placeholder="한마디" 
+            rows={3} 
+          />
+
         </div>
       </div>
 
@@ -367,7 +374,7 @@ export default function Main() {
             </div>
 
             <p className='large-text'>한마디</p>
-            <div className='textBlock textBloct-two'>
+            <div className='textBlock textBloct-two' style={{ whiteSpace: "pre-wrap" }}>
               <p>{oneWord}</p>
             </div>
           </div>

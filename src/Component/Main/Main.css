@@ -60,7 +60,8 @@
 }
 
 .pageWrap .sidebar input,
-.pageWrap .sidebar select {
+.pageWrap .sidebar select,
+.pageWrap .sidebar textarea {
   padding: 8px 10px;
   border-radius: 8px;
   border: 1px solid #ddd;
@@ -68,7 +69,14 @@
   width: calc(100% - 20px);
   background-color: #eee;
   color: #888;
+  font-family: 'KoPub Dotum', sans-serif;
 }
+.pageWrap .sidebar textarea {
+  resize: none; /* 높이 변경 금지 */
+  height: 60px; /* 원하는 고정 높이 */
+  overflow-y: auto; /* 내용이 많으면 스크롤 */
+}
+
 
 .pageWrap .sidebar .button {
   margin-top: 12px;
@@ -164,7 +172,11 @@
   width: 100%;
 }
 .pageWrap .canvas>div{
-  width: 46.5%;
+  width: 48%;
+  /* height: 80%; */
+}
+.pageWrap .canvas>div:nth-of-type(3){
+  width: 43.4%;
   /* height: 80%; */
 }
 
@@ -266,8 +278,13 @@
   overflow: hidden;
   color: #888;
 }
+.pageWrap .img-unit{
+  object-fit: cover;
+}
 .pageWrap .img-unit img{
+  height: 100%;
   width: 100%;
+    object-fit: cover;
 }
 .pageWrap .sul-name{
   color: #888;
